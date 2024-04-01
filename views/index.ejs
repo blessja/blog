@@ -1,0 +1,38 @@
+<%- include("partials/header.ejs") %>
+
+
+<h1 class="text-3xl font-bold my-8">Welcome to our Blog!</h1>
+
+  <p>Lorem ipsum dolor sit amet, et proin, justo mus. Porta suspendisse turpis netus sagittis tortor at, vitae aliquet
+    pharetra cras velit, id gravida, neque nulla lorem, posuere hac. Ultricies eget lacus vehicula, in ante aliquam
+    et,facilisis tempor duis orci. Sed molestie sem in duis eu id, nisl id ultricies metus blandit eget praesent, pede
+    tempornullam, vitae arcu tortor suspendisse nibh risus. Nulla id suscipit reiciendis nulla erat. Porta enim aute
+    luctus,ducimus sodales dolor.
+  </p>
+ 
+
+    <div class="container mx-auto pt-5">
+      <% posts.forEach(post => { %>
+      <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2"><%= post.title %></div>
+          <p class="text-gray-700 text-base">
+            <%= post.content %>
+          </p>
+        </div>
+        <div class="px-6 pt-4 pb-2">
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="/edit-post/<%= post._id %>"</a>Edit</a></span>
+          
+          <form action="/delete-post/<%= post._id %>" method="post" ">
+            <span type="submit">Delete</span>
+          </form>
+        </div>
+      </div>
+      
+   
+        
+      <% }) %>
+    </div>
+
+  <%- include("partials/footer.ejs") %>
