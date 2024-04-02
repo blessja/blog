@@ -10,29 +10,42 @@
     luctus,ducimus sodales dolor.
   </p>
  
-
-    <div class="container mx-auto pt-5">
+  <div class="container">
+    <div class="row">
       <% posts.forEach(post => { %>
-      <div class="max-w-sm rounded overflow-hidden shadow-lg">
-        <img class="w-full" src="/img/card-top.jpg" alt="Sunset in the mountains">
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2"><%= post.title %></div>
-          <p class="text-gray-700 text-base">
-            <%= post.content %>
-          </p>
+        <div class="col-md-6">
+          <div class="card mb-3">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img class="img-fluid" src="https://plus.unsplash.com/premium_photo-1669312747277-b1acd3eb2f98?q=80&w=200&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title"><%= post.title %></h5>
+                  <p class="mt-2"><%= post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content %></p>
+                  <div class="btn-group btn-group-sm" role="group" aria-label="Post actions">
+                    <span onclick="submitForm('/delete-post/<%= post._id %>')" class="btn btn-danger">Delete</span>
+                    <a href="/edit-post/<%= post._id %>" class="btn btn-primary">Edit</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="px-6 pt-4 pb-2">
-          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="/edit-post/<%= post._id %>"</a>Edit</a></span>
-          
-          <form action="/delete-post/<%= post._id %>" method="post" ">
-            <span type="submit">Delete</span>
-          </form>
-        </div>
-      </div>
-      
-   
-        
       <% }) %>
     </div>
+  </div>
+  
+  <script>
+    function submitForm(action) {
+      const form = document.createElement('form');
+      form.setAttribute('method', 'post');
+      form.setAttribute('action', action);
+      document.body.appendChild(form);
+      form.submit();
+    }
+  </script>
+  
 
+    
   <%- include("partials/footer.ejs") %>
